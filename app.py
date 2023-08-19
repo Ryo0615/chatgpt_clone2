@@ -12,7 +12,7 @@ def generate_g4f_response(messages: list) -> str:
     return response
 
 def main():
-    st.title("Chat with GPT4Free!")
+    st.title("Chat with ChatGPT Clone!")
 
     # Session state for retaining messages
     if 'messages' not in st.session_state:
