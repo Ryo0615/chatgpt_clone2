@@ -1,14 +1,19 @@
 import g4f
 import streamlit as st
+import requests
 
 def generate_g4f_response(messages: list) -> str:
-    response_stream = g4f.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=messages,
-        stream=True
-    )
+    try:
+        response_stream = g4f.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            stream=True
+        )
 
-    response = "".join([message for message in response_stream])
+        response = "".join([message for message in response_stream])
+    except requests.HTTPError as e:
+        st.markdown(f"{e} - {e.response.text}")
+        return ""
     return response
 
 def main():
